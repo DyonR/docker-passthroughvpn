@@ -58,8 +58,12 @@ while true; do
 	ping -c 1 $HOST > /dev/null 2>&1
 	STATUS=$?
 	if [[ "${STATUS}" -ne 0 ]]; then
-		echo "[ERROR] Network is down, exiting this Docker" | ts '%Y-%m-%d %H:%M:%.S'
-		exit 1
+		echo "[ERROR] Network is possibly down, sending a telegram message" | ts '%Y-%m-%d %H:%M:%.S'
+		curl -X POST \
+		-H 'Content-Type: application/json' \
+		-d '{"chat_id": "$TELEGRAM_BOT_TOKEN", "text": "The passthroughvpn container may be down", "disable_notification": false}' \
+		https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage
+		#exit 1
 	fi
 	if [ ! "${HEALTH_CHECK_SILENT}" -eq 1 ]; then
 		echo "[INFO] Network is up" | ts '%Y-%m-%d %H:%M:%.S'
