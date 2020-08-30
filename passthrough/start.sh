@@ -61,7 +61,7 @@ while true; do
 		echo "[ERROR] Network is possibly down, sending a telegram message" | ts '%Y-%m-%d %H:%M:%.S'
 		curl -X POST \
 		-H 'Content-Type: application/json' \
-		-d '{"chat_id": "$TELEGRAM_CHAT_ID", "text": "The passthroughvpn container may be down", "disable_notification": false}' \
+		-d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"The passthroughvpn container may be down\", \"disable_notification\": false}" \
 		https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage
 		#exit 1
 	fi
