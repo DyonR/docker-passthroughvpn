@@ -98,7 +98,6 @@ iptables -A INPUT -s "${docker_network_cidr}" -d "${docker_network_cidr}" -j ACC
 # accept input to vpn gateway
 iptables -A INPUT -i "${docker_interface}" -p $VPN_PROTOCOL --sport $VPN_PORT -j ACCEPT
 
-
 # additional port list for scripts or container linking
 if [[ ! -z "${ADDITIONAL_PORTS}" ]]; then
 	# split comma separated string into list from ADDITIONAL_PORTS env variable

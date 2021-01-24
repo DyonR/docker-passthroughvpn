@@ -14,9 +14,6 @@ RUN echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.li
     ipcalc \
     iptables \
     kmod \
-    libboost-system1.67.0 \
-    libqt5network5 \
-    libqt5xml5 \
     libssl1.1 \
     moreutils \
     net-tools \
