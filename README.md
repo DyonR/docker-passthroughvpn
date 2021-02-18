@@ -67,6 +67,8 @@ This are all container ports and host ports you have added in step 8.
 18. Apply the changes to the _passthroughvpn container_.  
 19. jDownloader2 should now be accessible via http://192.168.0.100:8012/vnc.html?autoconnect=true  
   
+---
+
 ## Scenario Two (Hosting Scenario)  
 For this scenario you would need three things.  
 - A (static) IP from a VPN service (or your own external OpenVPN server).  
