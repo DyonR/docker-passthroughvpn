@@ -47,7 +47,7 @@ This port is [exposed by the Docker container](https://docs.docker.com/engine/re
 5. Apply the changes to the _jDownloader2 container_. (The container will be inaccessible for now).  
 6. Open the 'Edit' page of the **_passthroughvpn container_**.  
 7. In the top right change the slider from `Basic View` to `Advanced View`.  
-8. Select the `Add another Path, Port, Variable, Label or Device` completely at the bottom and follow the example below:
+8. Select the `Add another Path, Port, Variable, Label or Device` completely at the bottom and follow the example below:  
 **Config Type**: `Port`  
 **Name**: `jDownloader2 Web interface`  
 **Container Port**: `8080`  
@@ -97,7 +97,7 @@ In these instructions, I do assume you have common sense, experience with Unraid
 5. Apply the changes to the _game server container_.  
 6. Open the 'Edit' page of the **_passthroughvpn container_**.  
 7. In the top right change the slider from `Basic View` to `Advanced View`.  
-8. Select the `Add another Path, Port, Variable, Label or Device` completely at the bottom and follow the example below:
+8. Select the `Add another Path, Port, Variable, Label or Device` completely at the bottom and follow the example below:  
 **Config Type**: `Port`  
 **Name**: `Game Server Web interface`  
 **Container Port**: `8443`  
