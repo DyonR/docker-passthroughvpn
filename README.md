@@ -36,7 +36,7 @@ This port is [exposed by the Docker container](https://docs.docker.com/engine/re
 
 #### Installing the passthroughvpn container  
 1. At the `Apps` section of Unraid search for `passthroughvpn`, you will see an app matching this name from my repository (Dyon's Repository).  
-2. Configure the container to your liking, please refer to the **Environment Variables** section below. Do not forget to correct the **LAN_NETWORK** variable.  
+2. Configure the container to your liking, please refer to the [**Environment Variables**](https://github.com/DyonR/docker-passthroughvpn#environment-variables) section below. Do not forget to correct the **LAN_NETWORK** variable.  
 3. The container will not yet successfully start, since there is no OpenVPN or WireGuard config added yet. This will be done in a later step. For now it will be stuck in a reboot loop.
   
 #### Configuring the containers
@@ -88,7 +88,7 @@ In these instructions, I do assume you have common sense, experience with Unraid
 
 #### Installing the passthroughvpn container  
 1. At the `Apps` section of Unraid search for `passthroughvpn`, you will see an app matching this name from my repository (Dyon's Repository).  
-2. Configure the container to your liking, please refer to the **Environment Variables** section below. Do not forget to correct the **LAN_NETWORK** variable.  
+2. Configure the container to your liking, please refer to the [**Environment Variables**](https://github.com/DyonR/docker-passthroughvpn#environment-variables) section below. Do not forget to correct the **LAN_NETWORK** variable.  
 3. The container will not yet successfully start, since there is no OpenVPN config added yet. This will be done in a later step. For now it will be stuck in a reboot loop.
   
 #### Configuring the containers
