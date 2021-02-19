@@ -3,13 +3,13 @@
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/dyonr/passthroughvpn/latest)](https://hub.docker.com/r/dyonr/passthroughvpn)
 
 Docker container which runs Debian 10 with a WireGuard or OpenVPN with iptables killswitch to prevent IP leakage when the tunnel goes down.
-This Docker runs nothing but Debian 10 with a VPN connection, but it's intended use is to route other containers with no VPN or proxy capability through this one to protect you IP.
-
+This Docker runs nothing but Debian 10 with a VPN connection, but it's intended use is to route other containers with no VPN or proxy capability through this one to protect you IP.  
+  
 ## Example usages
-* Hosting a (game) server service, but you do not want to expose your IP
-  * This would likely only be possible if you provider supports portforwarding
-* Containers that download online content, but have no 'vpn' version
-
+* Hosting a (game) server service, but you do not want to expose your IP  
+  * This would likely only be possible if your VPN provider supports portforwarding  
+* Containers that download online content, but have no 'vpn' version  
+  
 ## USAGE WARNING
 * If the container loses connection, and RESTART_CONTAINER is set to `yes` this container will restart when the connection is lost. Because of this, the Dockers you route through this one will rebuild and reconnect to the passthrough container.
 
@@ -154,35 +154,23 @@ Since I have no other reference material, in this example I will explain how I d
 |`HEALTH_CHECK_INTERVAL`| No |This is the time in seconds that the container waits to see if the internet connection still works (check if VPN died)|`HEALTH_CHECK_INTERVAL=300`|`300`|
 |`HEALTH_CHECK_SILENT`| No |Set to `1` to supress the 'Network is up' message. Defaults to `1` if unset.|`HEALTH_CHECK_SILENT=1`|`1`|
 
-# How to use WireGuard 
-The container will fail to boot if `VPN_ENABLED` is set and there is no valid .conf file present in the /config/wireguard directory. Drop a .conf file from your VPN provider into /config/wireguard and start the container again. The file must have the name `wg0.conf`, or it will fail to start.
-
-# How to use OpenVPN
-The container will fail to boot if `VPN_ENABLED` is set and there is no valid .ovpn file present in the /config/openvpn directory. Drop a .ovpn file from your VPN provider into /config/openvpn (if necessary with additional files like certificates) and start the container again. You may need to edit the ovpn configuration file to load your VPN credentials from a file by setting `auth-user-pass`.
-
-**Note:** The script will use the first ovpn file it finds in the /config/openvpn directory. Adding multiple ovpn files will not start multiple VPN connections.
-
-## Example auth-user-pass option for .ovpn files
-`auth-user-pass credentials.conf`
-
-## Example credentials.conf
-```
-username
-password
-```
+# Note about OpenVPN files  
+It is possible that OpenVPN will fail to start if there is no `auth-user-pass` line in your `.ovpn` file.  
+Open your .ovpn file with a text editor and check if the `auth-user-pass` line exists. If not, add this line to the first section of the config:  
+`auth-user-pass credentials.conf`  
+  
 
 ## PUID/PGID
-User ID (PUID) and Group ID (PGID) can be found by issuing the following command for the user you want to run the container as:
-
-```
-id <username>
-```
-
+User ID (PUID) and Group ID (PGID) can be found by issuing the following command for the user you want to run the container as: `id <username>`  
+Example output will be:  
+`uid=1000(dyon) gid=100(users) groups=100(users)`  
+In the container environment varables, this means I will set PUID to 1000 and PGID to 100.  
+  
 # Issues
 If you are having issues with this container please submit an issue on GitHub.  
 Please provide logs, Docker version and other information that can simplify reproducing the issue.  
-If possible, always use the most up to date version of Docker, you operating system, kernel and the container itself. Support is always a best-effort basis.
-
+If possible, always use the most up to date version of Docker, you operating system, kernel and the container itself. Support is always a best-effort basis.  
+  
 ### Credits:
 [MarkusMcNugen/docker-qBittorrentvpn](https://github.com/MarkusMcNugen/docker-qBittorrentvpn)  
 [DyonR/jackettvpn](https://github.com/DyonR/jackettvpn)  
