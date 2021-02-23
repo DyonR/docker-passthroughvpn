@@ -19,6 +19,7 @@ while true; do
         newStartTime=$(docker inspect --format='{{.State.StartedAt}}' ${passthroughvpnId} | xargs date +%s -d)
         STATUS=$?
         if [[ "${STATUS}" -ne 0 ]]; then
+            date +"%Y-%m-%d %H:%M:%S"
             echo "Failed to get status of passthroughvpn container id ${passthroughvpnId}."
             echo "Obtaining the new Docker id, the container most likely updated or did rebuild."
             passthroughvpnId=$(docker inspect --format='{{.Id}}' ${PASSTHROUGHVPNNAME})
@@ -35,6 +36,8 @@ while true; do
 
     # Restart all the containers that are getting passed through
     for passedthroughcontainer in ${passedthroughcontainers}; do
+        date +"%Y-%m-%d %H:%M:%S"
+        echo "Restarting container with id ${passedthroughcontainer}"
         /usr/bin/docker restart $passedthroughcontainer
     done
     sleep ${SLEEP_TIME}
