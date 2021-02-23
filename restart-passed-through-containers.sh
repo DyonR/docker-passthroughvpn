@@ -38,7 +38,7 @@ while true; do
     for passedthroughcontainer in ${passedthroughcontainers}; do
         NOW=$(date +"%Y-%m-%d %H:%M:%S")
         echo "${NOW} | Restarting container with id ${passedthroughcontainer}"
-        /usr/bin/docker restart $passedthroughcontainer
+        docker restart $passedthroughcontainer
     done
     sleep ${SLEEP_TIME}
 done
