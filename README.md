@@ -11,6 +11,7 @@ This Docker runs nothing but Debian 10 with a VPN connection, but it's intended 
 * Containers that download online content, but have no 'vpn' version  
   
 ## USAGE WARNING
+* **ANY CONTAINER THAT GETS ROUTED THROUGH THIS CONTAINER WILL (BRIEFLY) USE YOUR REAL IP. THIS IS BECAUSE THE PASSTHROUGHVPN CONTAINER NEEDS TO ESTABLISH A CONNECTION WITH THE VPN FIRST. TILL THAT IS DONE, THE CONTAINER(S) YOU PASSTHROUGH THIS CONTAINER WILL EXPOSE YOUR REAL IP. DO NOT USE THIS CONTAINER IF YOU WISH TO EXPOSE YOUR REAL IP FOR NOT A SINGLE SECOND. NORMALLY ESTABLISHING A VPN CONNECTION WILL TAKE A COUPLE SECONDS. HOWEVER, IF YOUR VPN PROVIDER IS UNREACHABLE, IT WILL KEEP ON USING YOUR REAL IP.** This is different than using any of my other 'vpn' containers, since with those the application (for example qBittorrent or Jackett) will start AFTER establishing the connection. By using this container, you will have a connection before connecting to the VPN.
 * If the container loses connection, and RESTART_CONTAINER is set to `yes` this container will restart when the connection is lost. Because of this, the Dockers you route through this one will rebuild and reconnect to the passthrough container.
 
 ## Container info
