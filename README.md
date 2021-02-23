@@ -12,7 +12,7 @@ This Docker runs nothing but Debian 10 with a VPN connection, but it's intended 
   
 ## USAGE WARNING
 * **ANY CONTAINER THAT GETS ROUTED THROUGH THIS CONTAINER WILL (BRIEFLY) USE YOUR REAL IP. THIS IS BECAUSE THE PASSTHROUGHVPN CONTAINER NEEDS TO ESTABLISH A CONNECTION WITH THE VPN FIRST. TILL THAT IS DONE, THE CONTAINER(S) YOU PASSTHROUGH THIS CONTAINER WILL EXPOSE YOUR REAL IP. DO NOT USE THIS CONTAINER IF YOU WISH TO EXPOSE YOUR REAL IP FOR NOT A SINGLE SECOND. NORMALLY ESTABLISHING A VPN CONNECTION WILL TAKE A COUPLE SECONDS. HOWEVER, IF YOUR VPN PROVIDER IS UNREACHABLE, IT WILL KEEP ON USING YOUR REAL IP.** This is different than using any of my other 'vpn' containers, since with those the application (for example qBittorrent or Jackett) will start AFTER establishing the connection. By using this container, you will have a connection before connecting to the VPN.
-* If the container loses connection, and RESTART_CONTAINER is set to `yes` this container will restart when the connection is lost. Because of this, the Dockers you route through this one will rebuild and reconnect to the passthrough container.
+* If the container loses connection, and RESTART_CONTAINER is set to `yes` this container will restart when the connection is lost. Because of this, the Dockers you route through this one will also lose connection. Therefore you need to either restart them manually or use my `restart-passed-through-containers` script in combination with [CA User Scripts](https://forums.unraid.net/topic/48286-plugin-ca-user-scripts/). Information about how to install this script can be found here: [**Installing the auto-restart script**](https://github.com/DyonR/docker-passthroughvpn#installing-the-auto-restart-script)
 
 ## Container info
 * Base: Debian 10-slim
@@ -135,6 +135,18 @@ Since I have no other reference material, in this example I will explain how I d
 10. Apply the changes to the _passthroughvpn container_.  
 11. The _game server_ web interface is now accessible via the VPN IP with port, http://37.120.192.19:5080/, and the game service at 37.120.192.19:5081.  
   
+# Installing the auto-restart script
+1. In Unraid, go to the Apps section and install "CA User Scripts" from Squid
+2. For easy installation, open the terminal in Unraid and run the following 3 commands:
+```
+mkdir -p /boot/config/plugins/user.scripts/scripts/passthrough_restart
+echo 'This script will check if the passthroughvpn container has restarted and restart the passed through containers' > /boot/config/plugins/user.scripts/scripts/passthrough_restart/description
+wget -q https://raw.githubusercontent.com/DyonR/docker-passthroughvpn/master/restart-passed-through-containers.sh -O /boot/config/plugins/user.scripts/scripts/passthrough_restart/script
+```
+3. In Unraid, go to Settings -> (User Utilities at the bottom) -> User Scripts
+4. Here you will see a script called 'passthrough_restart'. Set the schedule to At Startup of Array. And press Apply.
+5. Select Run In Background to start the script immediately
+
 
 # Variables, Volumes, and Ports
 ## Environment Variables
