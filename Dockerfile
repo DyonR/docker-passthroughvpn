@@ -1,4 +1,4 @@
-FROM debian:10-slim
+FROM debian:bullseye-slim
 
 RUN usermod -u 99 nobody
 

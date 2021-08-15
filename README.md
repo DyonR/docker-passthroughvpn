@@ -2,8 +2,8 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/dyonr/passthroughvpn)](https://hub.docker.com/r/dyonr/passthroughvpn)
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/dyonr/passthroughvpn/latest)](https://hub.docker.com/r/dyonr/passthroughvpn)
 
-Docker container which runs Debian 10 with a WireGuard or OpenVPN with iptables killswitch to prevent IP leakage when the tunnel goes down.
-This Docker runs nothing but Debian 10 with a VPN connection, but it's intended use is to route other containers with no VPN or proxy capability through this one to protect you IP.  
+Docker container which runs Debian Bullseye with a WireGuard or OpenVPN with iptables killswitch to prevent IP leakage when the tunnel goes down.
+This Docker runs nothing but Debian Bullseye with a VPN connection, but it's intended use is to route other containers with no VPN or proxy capability through this one to protect you IP.  
   
 ## Example usages
 * Hosting a (game) server service, but you do not want to expose your IP  
@@ -15,7 +15,7 @@ This Docker runs nothing but Debian 10 with a VPN connection, but it's intended 
 * If the container loses connection, and RESTART_CONTAINER is set to `yes` this container will restart when the connection is lost. Because of this, the Dockers you route through this one will also lose connection. Therefore you need to either restart them manually or use my `restart-passed-through-containers` script in combination with [CA User Scripts](https://forums.unraid.net/topic/48286-plugin-ca-user-scripts/). Information about how to install this script can be found here: [**Installing the auto-restart script**](https://github.com/DyonR/docker-passthroughvpn#installing-the-auto-restart-script)
 
 ## Container info
-* Base: Debian 10-slim
+* Base: Debian bullseye-slim
 * IP tables killswitch to prevent IP leaking when VPN connection fails, which reboots the container
 * Created with [Unraid](https://unraid.net/) in mind
 
