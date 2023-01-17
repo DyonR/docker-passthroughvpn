@@ -1,0 +1,24 @@
+version: "3.3"
+services:
+  passthroughvpn:
+    image: dyonr/passthroughvpn
+    container_name: passthroughvpn
+    privileged: true
+    volumes:
+      - '/var/lib/docker/volumes/passthroughvpn/config/:/config'
+      - '/var/lib/docker/volumes/passthroughvpn/data:/data'
+    environment:
+      - VPN_ENABLED=yes
+      - VPN_TYPE=wireguard #openvpn
+      - LAN_NETWORK=192.168.X.X/24 #Replace X
+      - ADDITIONAL_PORTS=8080 #JDownloader add more after setting a ,
+    ports:
+      - 9117:9117
+    restart: unless-stopped
+    networks:
+      - vpnprovider #Change 'vpnprovider' to the network name your containers are in
+networks:
+  vpnprovider: #Change 'vpnprovider' to the network name your containers are in
+    external: true
+
+## Run the container and copy your config files in /var/lib/docker/volumes/passthroughvpn/config/wireguard or openvpn while it's running!
